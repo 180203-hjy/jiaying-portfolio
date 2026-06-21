@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>创锋业务链路数字化展示｜企业路演视觉作品</title>
+  <link rel="stylesheet" href="ppt-viewer.css">
+</head>
+<body>
+  <div class="ppt-page">
+    <header class="ppt-header">
+      <a class="back-link" href="index.html?return=more#more">← 返回作品集</a>
+      <span class="ppt-header-note">部分内容已脱敏，仅展示节选页面，完整项目复盘可面谈提供。</span>
+    </header>
+    <main class="ppt-main ppt-main-compact">
+      <section class="ppt-detail-layout">
+        <aside class="ppt-info-panel">
+          <p class="eyebrow">企业路演视觉作品</p>
+          <h1 data-project-title></h1>
+          <p class="ppt-company" data-project-company></p>
+          <p class="ppt-description" data-project-description></p>
+          <div class="ppt-tags" data-project-tags></div>
+          <div class="ppt-role">
+            <span>我负责</span>
+            <p data-project-role></p>
+          </div>
+          <div class="ppt-actions">
+            <a class="btn btn-secondary" href="index.html?return=more#more">返回作品集</a>
+            <a class="btn btn-primary" href="index.html#contact">联系我查看完整材料</a>
+          </div>
+        </aside>
+        <section class="viewer-shell" aria-label="PPT 节选浏览器">
+          <div class="viewer-stage">
+            <button class="viewer-arrow prev" type="button" data-prev aria-label="上一页">←</button>
+            <div class="slide-frame"></div>
+            <button class="viewer-arrow next" type="button" data-next aria-label="下一页">→</button>
+          </div>
+          <div class="viewer-meta">
+            <strong class="slide-count"></strong>
+            <p class="slide-caption"></p>
+          </div>
+          <div class="thumb-strip" aria-label="缩略图导航"></div>
+        </section>
+      </section>
+    </main>
+  </div>
+  <script>
+    window.pptProject = {
+      title: "创锋业务链路数字化展示",
+      company: "武义创锋工具制造有限公司",
+      description: "围绕制造企业销售、研发与生产协同问题，梳理业务链路断点，并转化为更清晰的路演展示材料。",
+      tags: ["制造业数字化", "业务链路", "场景拆解", "方案可视化"],
+      role: "业务问题梳理 / 场景结构提炼 / PPT视觉优化 / 路演表达整理",
+      slides: [
+        { type: "image", image: "assets/ppt-chuangfeng-01.webp", caption: "企业定位与项目概述" },
+        { type: "image", image: "assets/ppt-chuangfeng-03.webp", caption: "行业背景与数据要素链路" },
+        { type: "image", image: "assets/ppt-chuangfeng-04.webp", caption: "销售、研发、生产协同断点梳理" },
+        { type: "image", image: "assets/ppt-chuangfeng-05.webp", caption: "数据要素应用场景提炼" }
+      ]
+    };
+  </script>
+  <script src="ppt-viewer.js"></script>
+</body>
+</html>

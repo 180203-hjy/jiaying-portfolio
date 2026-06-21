@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>韩佳颖｜AI产品营销与AIGC内容资产个人网站</title>
+<meta content="韩佳颖的个人网站，展示 AI产品营销、AIGC内容资产、B2B产品展示、项目表达、销售辅助内容与企业方案可视化案例。" name="description"/>
+<meta content="AIGC产品营销, 产品展示, 项目表达, 销售辅助内容, B2B产品展示, 商业路演PPT, AI视觉资产" name="keywords"/>
+<meta content="韩佳颖｜AI产品营销与AIGC内容资产个人网站" property="og:title"/>
+<meta content="聚焦 AI产品营销、AIGC内容资产、B2B产品展示、项目表达与销售辅助材料。" property="og:description"/>
+<meta content="website" property="og:type"/>
+<meta content="assets/og-cover.jpg" property="og:image"/>
+<script>
+  (() => {
+    try {
+      const target = new URLSearchParams(window.location.search).get("return");
+      if (target === "cases" || target === "more") {
+        document.documentElement.classList.add("is-return-navigation");
+        document.documentElement.dataset.returnTarget = target;
+      }
+    } catch {
+      // Ignore malformed URLs and keep the normal intro flow.
+    }
+  })();
+</script>
+<link href="style.css?v=20260613-return-root-fix-1" rel="stylesheet"/>
+</head>
+<body>
+<header class="site-header">
+<a class="brand" href="#home">韩佳颖</a>
+<nav aria-label="主导航" class="nav"><a href="#home">首页</a><a href="#skills">AIGC 工作流</a><a href="#deliverables">交付能力</a><a href="#cases">代表项目</a><a href="#profile">关于我</a><a href="#contact">联系我</a></nav>
+<button aria-expanded="false" aria-label="打开导航" class="nav-toggle" type="button">☰</button>
+</header>
+<main>
+<section aria-label="开场视频" class="intro-video-section" id="intro">
+<div class="intro-video-frame">
+<video autoplay="" class="intro-video" loop="" muted="" playsinline="">
+<source src="assets/intro-video.mp4" type="video/mp4"/>
+</video>
+</div>
+<a aria-label="进入作品集首页" class="intro-enter-btn" href="#home">
+<span>进入作品集</span>
+<small>Enter Portfolio</small>
+</a>
+</section><script>
+(() => {
+  const enterButton = document.querySelector(".intro-enter-btn");
+  if (!enterButton) return;
+
+  const closeIntroOverlays = () => {
+    document.querySelectorAll(".video-lightbox, .lightbox, .contact-modal, .scholarship-drawer, [data-workflow-preview-panel]").forEach((overlay) => {
+      overlay.classList.remove("is-open");
+      overlay.setAttribute("aria-hidden", "true");
+    });
+
+    document.querySelectorAll(".video-lightbox video").forEach((video) => {
+      video.pause();
+      video.removeAttribute("src");
+      video.load();
+    });
+  };
+
+  const scrollToHome = () => {
+    const bridge = document.querySelector("[data-aigc-bridge]") || document.querySelector("#home");
+    if (!bridge) return;
+
+    const bridgeTop = bridge.getBoundingClientRect().top + window.scrollY;
+    const scrollable = Math.max(1, bridge.offsetHeight - window.innerHeight);
+    window.scrollTo({
+      top: Math.max(0, bridgeTop + scrollable * 0.11),
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth"
+    });
+  };
+
+  const enterPortfolio = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    event.stopImmediatePropagation();
+
+    if (typeof window.__enterPortfolioFromIntro === "function") {
+      window.__enterPortfolioFromIntro(event);
+      return;
+    }
+
+    window.__enteringPortfolio = true;
+    window.__suppressBridgeSnapUntil = Date.now() + 1400;
+    closeIntroOverlays();
+    document.body.classList.remove("is-gate-locked", "gate-intro");
+    document.body.classList.add("gate-unlocked", "is-entering-portfolio");
+    history.pushState(null, "", "#home");
+
+    scrollToHome();
+    requestAnimationFrame(scrollToHome);
+    setTimeout(scrollToHome, 120);
+    setTimeout(closeIntroOverlays, 160);
+    setTimeout(() => {
+      document.body.classList.remove("is-entering-portfolio");
+      window.__enteringPortfolio = false;
+    }, 1400);
+  };
+
+  enterButton.addEventListener("click", enterPortfolio, true);
+  enterButton.addEventListener("pointerup", (event) => {
+    if (event.pointerType === "mouse" && event.button !== 0) return;
+    enterPortfolio(event);
+  }, true);
+})();
+</script><section class="aigc-bridge-section" data-aigc-bridge="" id="home">
+<div class="aigc-bridge-sticky">
+<div aria-hidden="true" class="aigc-bridge-bg"></div>
+<section aria-label="问题拆解" class="aigc-bridge-panel aigc-bridge-problems">
+<div class="aigc-bridge-copy">
+<p class="eyebrow">Before Workflow</p>
+<h2>复杂业务不是缺素材，<br/>而是缺一套能被客户理解的表达链路</h2>
+<p>面对工业制造、B2B 产品与企业方案，我关注的是如何借助 AIGC，把产品资料、业务卖点和应用场景转化为销售能讲、客户能懂、项目能复用的内容资产。</p>
+</div>
+<div class="aigc-problem-grid">
+<article class="aigc-problem-card aigc-travel-card travel-card-1" style="--card-image: url('assets/aigc-problem-bg.webp')">
+<span>01</span>
+<h3>产品价值难表达</h3>
+<p>技术参数和业务优势分散在资料里，客户很难快速看懂“为什么需要”。</p>
+</article>
+<article class="aigc-problem-card aigc-travel-card travel-card-2" style="--card-image: url('assets/aigc-problem-bg.webp')">
+<span>02</span>
+<h3>表达链路难贯通</h3>
+<p>资料、脚本、视觉和物料各自推进，每一步都需要重新组织表达。</p>
+</article>
+<article class="aigc-problem-card aigc-travel-card travel-card-3" style="--card-image: url('assets/aigc-problem-bg.webp')">
+<span>03</span>
+<h3>展示转化难支撑</h3>
+<p>方案有内容，但缺少场景化表达，难以直接支撑路演、销售沟通和客户决策。</p>
+</article>
+</div>
+</section>
+<section aria-label="AIGC 工作流处理" class="aigc-bridge-panel aigc-bridge-image-panel" id="skills">
+<div class="workflow-hero-carousel" data-workflow-hero-carousel="">
+<div class="workflow-hero-bg" data-workflow-hero-bg=""></div>
+<div class="workflow-hero-copy" data-workflow-hero-copy="">
+<p class="eyebrow">02 内容工作流</p>
+<p class="workflow-hero-number" data-workflow-hero-number="">01</p>
+<h2 data-workflow-hero-title="">业务拆解</h2>
+<p data-workflow-hero-desc="">从产品资料、客户场景和销售目标中提炼痛点、卖点与受众，明确内容表达方向。</p>
+<span data-workflow-hero-tags="">痛点 / 卖点 / 受众</span>
+</div>
+<div aria-label="内容工作流等待卡片" class="workflow-hero-card-track" data-workflow-card-track=""></div>
+<div class="workflow-hero-controls">
+<button aria-label="上一个流程" data-workflow-prev="" type="button">←</button>
+<button aria-label="下一个流程" data-workflow-next="" type="button">→</button>
+<span data-workflow-counter="">01 / 05</span>
+</div>
+</div>
+</section>
+<section aria-label="交付能力" class="aigc-bridge-panel aigc-bridge-outputs" id="deliverables">
+<div class="skills-image-frame workflow-hotspot-wrapper image-slot" data-workflow-hotspots="">
+<img alt="交付能力图" data-fallback="" loading="lazy" src="assets/skills-workflow.webp"/>
+<button aria-label="查看海报素材" class="workflow-hotspot workflow-hotspot-poster" data-workflow-type="poster" type="button"></button>
+<button aria-label="查看PPT素材" class="workflow-hotspot workflow-hotspot-ppt" data-workflow-type="ppt" type="button"></button>
+<button aria-label="查看网页素材" class="workflow-hotspot workflow-hotspot-web" data-workflow-type="web" type="button"></button>
+<button aria-label="查看动态演示素材" class="workflow-hotspot workflow-hotspot-motion" data-workflow-type="motion" type="button"></button>
+<button aria-label="查看展示物料素材" class="workflow-hotspot workflow-hotspot-material" data-workflow-type="material" type="button"></button>
+<div aria-hidden="true" aria-label="输出成果素材预览" class="workflow-preview-panel" data-workflow-preview-panel="" role="dialog">
+<div class="workflow-preview-header">
+<div class="workflow-preview-copy">
+<h3 data-workflow-preview-title="">海报</h3>
+<p data-workflow-preview-desc="">借助 Image-2，快速生成多版海报方案。</p>
+</div>
+<nav aria-label="成果类型切换" class="workflow-preview-tabs">
+<button data-workflow-tab="poster" type="button">海报</button>
+<button data-workflow-tab="ppt" type="button">PPT</button>
+<button data-workflow-tab="web" type="button">网页</button>
+<button data-workflow-tab="motion" type="button">动态演示</button>
+<button data-workflow-tab="material" type="button">展示物料</button>
+</nav>
+<button aria-label="关闭素材预览" class="workflow-preview-close" data-workflow-preview-close="" type="button">×</button>
+</div>
+<div class="workflow-preview-scroll-wrap">
+<div class="workflow-preview-media" data-workflow-preview-media=""></div>
+</div>
+</div>
+</div>
+<p class="workflow-example-note">以金华玖蕴科技有限公司为例，展示从业务理解、脚本重构到 AIGC 营销资产交付的完整工作流。</p>
+</section>
+</div>
+</section><section class="section" id="cases">
+<div class="selected-works-reveal" data-selected-works-reveal="">
+<div class="selected-works-sticky">
+<div class="selected-works-heading">
+<div class="selected-works-title-panel">
+<p class="eyebrow">Selected Work</p>
+<h2>代表项目</h2>
+</div>
+<div class="selected-works-desc-panel">
+<p><span>三组代表项目分别对应跨境外贸销售展示、B2B 技术方案转译与文旅品牌内容策划，</span><span>重点呈现从业务信息拆解到内容资产交付的完整表达能力。</span></p>
+</div>
+</div>
+<div aria-label="精选案例滚动展开展示" class="works-stage">
+<div aria-label="精选案例总封面" class="works-hero-image image-slot">
+<!-- 替换精选案例总封面：将图片命名为 selected-works-cover.jpg，并放入 assets 文件夹 -->
+<img alt="精选案例总封面" data-fallback="" loading="lazy" src="assets/selected-works-cover.webp"/>
+<span><strong>Selected Works</strong><small>assets/selected-works-cover.webp</small></span>
+</div>
+<div class="works-cards">
+<article class="work-card work-card-1" style="--card-offset: -1; --flip: var(--flip-1);">
+<div class="work-card-inner">
+<div class="work-card-front image-slot">
+<!-- 预留第一张拆解竖图：后续替换 assets/work-card-01.webp 即可 -->
+<img alt="精选案例拆解竖图 01" data-fallback="" loading="lazy" src="assets/work-card-01.webp"/>
+</div>
+<div class="work-card-back">
+<article class="case-card" id="case-xinzhi">
+<div class="case-media image-slot">
+<!-- 替换项目封面图：将图片命名为 case-xinzhi.jpg，并放入 assets 文件夹 -->
+<img alt="鑫智兰天项目封面" data-fallback="" loading="lazy" src="assets/case-xinzhi.webp"/>
+<span><strong>项目封面预留｜鑫智兰天</strong><small>跨境外贸 / AI虚拟推销员 / 3D面料展示</small></span>
+</div>
+<div class="case-body">
+<p class="case-tag">跨境外贸 / AI虚拟推销员 / 3D面料展示</p>
+<h3>跨境纺织外贸销售辅助内容｜鑫智兰天</h3>
+<p class="case-intro">通过 AI 虚拟推销员、3D 面料展示与动态演示，重构纺织外贸客户展示链路。</p>
+<div class="case-details" hidden="">
+<p class="role-line"><strong>我的角色：</strong>项目策划｜AI虚拟推销员IP孵化｜3D面料展示｜动态演示视频｜路演PPT视觉统筹</p>
+<p class="case-tools"><strong>工具与产出：</strong>GPT / Gemini / Blender / Flow / 路演PPT / 3D面料展示 / AI虚拟推销员IP</p>
+<div aria-label="关键成果" class="project-impact">
+<p>关键成果</p>
+<ul>
+<li>获得 1 项软件著作权、1 项外观设计专利</li>
+<li>与金华玖蕴科技、金华有信科技达成校企合作</li>
+<li>与浙江鑫兰纺织签订 Agent 采纳证明</li>
+</ul>
+</div>
+</div>
+<div class="case-actions">
+<button aria-expanded="false" class="btn btn-secondary case-toggle" type="button">展开详情</button>
+<a class="btn btn-card" href="cases/xinzhi/index.html">查看项目复盘</a>
+</div>
+</div>
+</article>
+</div>
+</div>
+</article>
+<article class="work-card work-card-2" style="--card-offset: 0; --flip: var(--flip-2);">
+<div class="work-card-inner">
+<div class="work-card-front image-slot">
+<!-- 预留第二张拆解竖图：后续替换 assets/work-card-02.webp 即可 -->
+<img alt="精选案例拆解竖图 02" data-fallback="" loading="lazy" src="assets/work-card-02.webp"/>
+</div>
+<div class="work-card-back">
+<article class="case-card" id="case-yiqitong">
+<div class="case-media image-slot">
+<!-- 替换项目封面图：将图片命名为 case-yiqitong.jpg，并放入 assets 文件夹 -->
+<img alt="一气通罐项目封面" data-fallback="" loading="lazy" src="assets/case-yiqitong.webp"/>
+<span><strong>项目封面预留｜一气通罐</strong><small>B2B产品 / 技术转译 / 路演转化</small></span>
+</div>
+<div class="case-body">
+<p class="case-tag">B2B产品 / 技术转译 / 路演转化</p>
+<h3>B2B硬科技产品展示与营销内容｜一气通罐</h3>
+<p class="case-intro">将复杂的 LPG 智慧监管技术方案，转化为可理解、可展示、可合作的商业表达。</p>
+<div class="case-details" hidden="">
+<p class="role-line"><strong>我的角色：</strong>技术逻辑转译｜业务流程重构｜AI视觉产出｜移动端原型展示｜路演内容呈现</p>
+<p class="case-tools"><strong>工具与产出：</strong>GPT / AI绘图 / HTML / CSS / 移动端原型 / 路演PPT / 科研示意图 / 产品展示图</p>
+<div aria-label="关键成果" class="project-impact">
+<p>关键成果</p>
+<ul>
+<li>获得 3 项软件著作权、2 项实用新型专利</li>
+<li>与浙江金象科技、金华简凡智能科技达成校企合作</li>
+<li>与兰溪市顶峰生态农业开发有限公司、安去县溪龙黄社乐平茶场签订农业合作意向书</li>
+<li>获国家级、省级等多项课题立项，累计资金资助超 3 万元</li>
+</ul>
+</div>
+</div>
+<div class="case-actions">
+<button aria-expanded="false" class="btn btn-secondary case-toggle" type="button">展开详情</button>
+<a class="btn btn-card" href="cases/yiqitong/index.html">案例演示</a>
+</div>
+</div>
+</article>
+</div>
+</div>
+</article>
+<article class="work-card work-card-3" style="--card-offset: 1; --flip: var(--flip-3);">
+<div class="work-card-inner">
+<div class="work-card-front image-slot">
+<!-- 预留第三张拆解竖图：后续替换 assets/work-card-03.webp 即可 -->
+<img alt="精选案例拆解竖图 03" data-fallback="" loading="lazy" src="assets/work-card-03.webp"/>
+</div>
+<div class="work-card-back">
+<article class="case-card" id="case-yongan">
+<div class="case-media image-slot">
+<!-- 替换项目封面图：将图片命名为 case-yongan.jpg，并放入 assets 文件夹 -->
+<img alt="永安村项目封面" data-fallback="" loading="lazy" src="assets/case-yongan.webp"/>
+<span><strong>项目封面预留｜永安村乡村振兴</strong><small>品牌内容 / IP孵化 / AI视频</small></span>
+</div>
+<div class="case-body">
+<p class="case-tag">文旅品牌 / IP孵化 / AI视觉策划</p>
+<h3>文旅品牌 AIGC 内容策划｜永安村乡村振兴</h3>
+<p class="case-intro">围绕乡村夜游场景，构建“月相三部曲”主题策划与文旅品牌视觉叙事。</p>
+<div class="case-details" hidden="">
+<p class="role-line"><strong>我的角色：</strong>场景化商业策划｜品牌IP孵化｜AI宣传动画制作｜路演视觉内容统筹</p>
+<p class="case-tools"><strong>工具与产出：</strong>GPT / AI绘图 / 即梦 / Flow / Photoshop / 品牌IP / 宣传动画 / 路演PPT</p>
+<div aria-label="关键成果" class="project-impact">
+<p>关键成果</p>
+<ul>
+<li>与杭州永安村达成合作</li>
+<li>夜游策划方案获得实际采纳证明</li>
+<li>推动乡村文旅场景的品牌化表达与视觉升级</li>
+</ul>
+</div>
+</div>
+<div class="case-actions">
+<button aria-expanded="false" class="btn btn-secondary case-toggle" type="button">展开详情</button>
+<a class="btn btn-card" href="cases/yongan/index.html">案例演示</a>
+</div>
+</div>
+</article>
+</div>
+</div>
+</article>
+</div>
+<p class="selected-works-footnote">以下案例与视觉材料主要由本人独立完成或主导完成，涉及企业信息已做必要脱敏处理。</p>
+</div>
+</div>
+</div>
+</section>
+<section class="section more-ppt-section" id="more">
+<div class="more-ppt-showcase">
+<div class="more-ppt-heading">
+<p class="eyebrow">Case Library</p>
+<h3>更多企业方案可视化案例</h3>
+<p>这里收录更多企业方案、技术表达与申报展示材料节选，作为代表项目之外的内容资产样本库。</p>
+<small>部分信息已做脱敏处理，当前仅展示可公开的页面与动态片段。</small>
+</div>
+<div class="more-ppt-carousel" data-ppt-carousel="">
+<div class="more-ppt-viewport">
+<div class="more-ppt-track">
+<article class="more-ppt-item">
+<a aria-label="查看察微见智项目节选" class="more-ppt-cover image-slot" href="ppt-chaweijianzhi.html">
+<img alt="察微见智 PPT 封面" data-fallback="" decoding="async" loading="lazy" src="assets/ppt-chaweijianzhi-cover.webp"/>
+<span><strong>察微见智</strong><small>PPT视觉</small></span>
+</a>
+<div class="more-ppt-content">
+<p class="more-ppt-tag">工业数智化 / 系统展示 / 方案可视化</p>
+<p class="more-ppt-level">重点节选｜系统展示</p>
+<a class="more-ppt-title" href="ppt-chaweijianzhi.html">察微见智</a>
+<p>把系统能力、业务流程与场景价值整理成轻量级数智化管理方案。</p>
+<div class="more-ppt-tags">
+<span>工业数智化</span>
+<span>系统展示</span>
+<span>方案可视化</span>
+</div>
+<a class="more-ppt-link" href="ppt-chaweijianzhi.html">查看节选 →</a>
+</div>
+</article>
+<article class="more-ppt-item">
+<a aria-label="查看创锋业务链路数字化展示项目节选" class="more-ppt-cover image-slot" href="ppt-chuangfeng.html">
+<img alt="创锋业务链路数字化展示 PPT 封面" data-fallback="" decoding="async" loading="lazy" src="assets/ppt-chuangfeng-cover.webp"/>
+<span><strong>创锋业务链路数字化展示</strong><small>制造数字化</small></span>
+</a>
+<div class="more-ppt-content">
+<p class="more-ppt-tag">制造业数字化 / 业务链路 / 数据要素</p>
+<p class="more-ppt-level">重点节选｜业务链路</p>
+<a class="more-ppt-title" href="ppt-chuangfeng.html">创锋业务链路数字化展示</a>
+<p>把销售、研发、生产的协同断点转化为数据要素应用表达。</p>
+<div class="more-ppt-tags">
+<span>制造业数字化</span>
+<span>业务链路</span>
+<span>智能排产</span>
+</div>
+<a class="more-ppt-link" href="ppt-chuangfeng.html">查看节选 →</a>
+</div>
+</article>
+<article class="more-ppt-item">
+<a aria-label="查看芯有灵犀项目节选" class="more-ppt-cover image-slot" href="ppt-xinyoulingxi.html">
+<img alt="芯有灵犀 PPT 封面" data-fallback="" decoding="async" loading="lazy" src="assets/ppt-xinyoulingxi-cover.webp"/>
+<span><strong>芯有灵犀</strong><small>智能仓储</small></span>
+</a>
+<div class="more-ppt-content">
+<p class="more-ppt-tag">智能仓储 / AI算法 / 企业路演</p>
+<p class="more-ppt-level">快速节选｜智能仓储</p>
+<a class="more-ppt-title" href="ppt-xinyoulingxi.html">芯有灵犀</a>
+<p>把芯片、软件与 AI 算法组合成中小企业仓储智能化方案。</p>
+<div class="more-ppt-tags">
+<span>智能仓储</span>
+<span>AI算法</span>
+<span>企业路演</span>
+</div>
+<a class="more-ppt-link" href="ppt-xinyoulingxi.html">查看节选 →</a>
+</div>
+</article>
+<article class="more-ppt-item">
+<a aria-label="查看玖蕴智能协同方案项目节选" class="more-ppt-cover image-slot" href="ppt-jiuyun.html">
+<img alt="玖蕴智能协同方案 PPT 封面" data-fallback="" decoding="async" loading="lazy" src="assets/ppt-jiuyun-cover.webp"/>
+<span><strong>玖蕴智能协同方案</strong><small>智能协同</small></span>
+</a>
+<div class="more-ppt-content">
+<p class="more-ppt-tag">智能协同 / 制造业服务 / 方案展示</p>
+<p class="more-ppt-level">动态演示｜智能协同</p>
+<a class="more-ppt-title" href="ppt-jiuyun.html">玖蕴智能协同方案</a>
+<p>以品牌定位、模型能力和研发流程演示企业智能协同服务。</p>
+<div class="more-ppt-tags">
+<span>智能协同</span>
+<span>制造业服务</span>
+<span>方案展示</span>
+</div>
+<a class="more-ppt-link" href="ppt-jiuyun.html">查看节选 →</a>
+</div>
+</article>
+<article class="more-ppt-item">
+<a aria-label="查看中科磁业工业科技方案可视化项目节选" class="more-ppt-cover image-slot" href="ppt-zhongke.html">
+<img alt="中科磁业工业科技方案可视化 PPT 封面" data-fallback="" decoding="async" loading="lazy" src="assets/ppt-zhongke-cover.webp"/>
+<span><strong>中科磁业工业科技方案可视化</strong><small>工业科技</small></span>
+</a>
+<div class="more-ppt-content">
+<p class="more-ppt-tag">工业科技 / AI辅助梳理 / 路演包装</p>
+<p class="more-ppt-level">方案节选｜工业科技表达</p>
+<a class="more-ppt-title" href="ppt-zhongke.html">中科磁业工业科技方案可视化</a>
+<p>借助 AI，在短时间内完成工业科技项目的信息梳理、结构提炼与路演视觉包装。</p>
+<div class="more-ppt-tags">
+<span>AI辅助提效</span>
+<span>工业科技路演</span>
+<span>方案可视化</span>
+</div>
+<a class="more-ppt-link" href="ppt-zhongke.html">查看节选 →</a>
+</div>
+</article>
+</div>
+</div>
+<div aria-label="企业路演视觉作品切换" class="more-ppt-controls">
+<button aria-label="向左浏览更多作品" class="more-ppt-arrow more-ppt-prev" data-ppt-prev="" type="button">←</button>
+<span class="more-ppt-hint">横向拖动查看 6 个企业方案案例</span>
+<button aria-label="向右浏览更多作品" class="more-ppt-arrow more-ppt-next" data-ppt-next="" type="button">→</button>
+</div>
+<div aria-hidden="true" class="more-ppt-progress"><span></span></div>
+</div>
+</div>
+</section>
+<div class="hero-skills-transition profile-transition" data-hero-skills-transition="">
+<div aria-hidden="true" class="hero-transition-sticky-bg">
+<div class="hero-light-rays"></div>
+<div class="hero-tree-bg"></div>
+<video class="hero-tree-dissolve-video" muted="" playsinline="" preload="auto">
+<source src="assets/hero-tree-dissolve.mp4" type="video/mp4"/>
+</video>
+<canvas class="hero-tree-particles"></canvas>
+<div class="hero-orb hero-orb-gold"></div>
+<div class="hero-orb hero-orb-purple"></div>
+<div class="hero-orb hero-orb-dark"></div>
+</div>
+<section aria-label="关于我" class="hero section hero-scroll-scene" id="profile">
+<div class="hero-scroll-sticky">
+<div class="hero-content-stack">
+<div class="hero-copy">
+<p class="eyebrow">About Me</p>
+<h1>韩佳颖</h1>
+<p class="role">AI产品营销与AIGC内容资产</p>
+</div>
+<div class="hero-main">
+<p class="value">
+          我关注 AI 产品营销、B2B 内容营销与商业展示表达，擅长将产品信息、业务需求与复杂技术方案转化为可展示、可传播、可辅助销售沟通的内容资产。
+        </p>
+<div aria-label="核心优势" class="hero-tags">
+<span>产品卖点提炼</span>
+<span>销售辅助内容</span>
+<span>B2B方案可视化</span>
+</div>
+<div class="hero-actions">
+<a class="btn btn-primary hero-next-btn" href="#deliverables">查看交付能力 <span aria-hidden="true">↓</span></a>
+<a class="btn btn-primary" href="#cases">查看代表项目</a>
+</div>
+</div>
+</div>
+<aside aria-label="悬挂式个人身份吊牌" class="hero-side hero-lanyard-side">
+<div aria-label="韩佳颖个人身份吊牌" class="hero-lanyard">
+<div aria-hidden="true" class="lanyard-top-hook"></div>
+<div aria-hidden="true" class="lanyard-rope">
+<span class="lanyard-rope-band lanyard-rope-left"></span>
+<span class="lanyard-rope-band lanyard-rope-right"></span>
+<span class="lanyard-clip"></span>
+</div>
+<div class="lanyard-card-swing">
+<div aria-label="韩佳颖身份吊牌，悬停或点击查看背面信息" aria-pressed="false" class="lanyard-card" data-lanyard-card="" role="button" tabindex="0">
+<div class="lanyard-card-inner">
+<div class="lanyard-card-face lanyard-card-front image-slot">
+<img alt="韩佳颖身份吊牌正面照片" data-fallback="" src="assets/avatar.jpg"/>
+<div class="lanyard-card-overlay lanyard-front-copy">
+<p class="lanyard-mini">AIGC PRODUCT MARKETING</p>
+<strong>韩佳颖</strong>
+<small>AIGC产品营销方向</small>
+</div>
+<span><strong>JY</strong><small>AIGC产品营销</small></span>
+</div>
+<div class="lanyard-card-face lanyard-card-back">
+<div class="lanyard-back-overlay">
+<div class="lanyard-back-header">
+<strong>JIAYING HAN</strong>
+<span>韩佳颖</span>
+</div>
+<div class="lanyard-back-info">
+<p>2005 / 女生</p>
+<p>浙江台州温岭</p>
+</div>
+<div class="lanyard-back-current">
+<small>CURRENT</small>
+<p>可实习 / 可沟通</p>
+<p>可快速进入项目</p>
+</div>
+<div class="lanyard-back-type">INTJ</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p class="lanyard-hint">Hover / Click to flip</p>
+</div>
+</aside>
+</div>
+</section>
+</div>
+
+<section class="section compact-block business-proof-simple" data-business-proof-wrapper="" id="business-proof">
+<div class="business-proof-image-only image-slot">
+<img alt="关于我" data-fallback="" decoding="async" loading="lazy" src="assets/more-experience-cover.webp"/>
+<button aria-label="查看教育背景证明" class="business-proof-hotspot business-proof-hotspot-education" data-business-proof-type="education" type="button"></button>
+<button aria-label="查看企业验收资料整理记录" class="business-proof-hotspot business-proof-hotspot-tech" data-business-proof-type="tech" type="button"></button>
+<button aria-label="查看产品宣讲材料记录" class="business-proof-hotspot business-proof-hotspot-operation" data-business-proof-type="operation" type="button"></button>
+<button aria-label="查看企业侧汇报与商业展示记录" class="business-proof-hotspot business-proof-hotspot-presentation" data-business-proof-type="presentation" type="button"></button>
+<button aria-label="查看外贸客户沟通记录" class="business-proof-hotspot business-proof-hotspot-trade" data-business-proof-type="trade" type="button"></button>
+</div>
+<div class="business-proof-backdrop" data-business-proof-backdrop=""></div>
+<aside aria-hidden="true" aria-label="参与记录抽屉" class="business-proof-drawer" data-business-proof-drawer="" role="dialog">
+<button aria-label="关闭参与记录" class="business-proof-drawer-close" data-business-proof-drawer-close="" type="button"><span>关闭</span></button>
+<div class="business-proof-drawer-head">
+<p class="drawer-kicker" data-business-drawer-kicker=""></p>
+<h3 data-business-drawer-title=""></h3>
+</div>
+<nav aria-label="参与记录切换" class="business-record-switcher">
+<button data-business-record-tab="tech" type="button">01 验收</button>
+<button data-business-record-tab="operation" type="button">02 宣讲</button>
+<button data-business-record-tab="presentation" type="button">03 展示</button>
+<button data-business-record-tab="trade" type="button">04 外贸</button>
+</nav>
+<div class="business-proof-drawer-section">
+<span class="drawer-label">我负责的部分</span>
+<ul class="drawer-chip-list" data-business-drawer-actions=""></ul>
+</div>
+<div class="business-proof-drawer-section">
+<span class="drawer-label">证据预览</span>
+<div class="business-proof-drawer-media" data-business-drawer-media=""></div>
+</div>
+<div class="business-proof-drawer-section">
+<span class="drawer-label">能证明什么</span>
+<p class="drawer-proof-line" data-business-drawer-proof=""></p>
+</div>
+<p class="drawer-tip">已脱敏展示｜点击放大查看</p>
+</aside>
+</section>
+<section class="section contact-section" id="contact">
+<div class="contact-entry">
+<h2>联系我</h2>
+<p>如果你希望了解完整案例、讨论项目合作，或需要进一步查看可公开材料，我可以围绕代表项目、内容资产与工作流做更完整说明。</p>
+<div class="contact-target-roles">
+<span>适配方向</span>
+<p>AI 产品营销 / B2B 内容营销 / 解决方案表达 / AIGC 内容资产制作与项目展示支持</p>
+</div>
+</div>
+<div aria-label="联系卡片" class="contact-card-wrap border-glow-card border-glow-contact">
+<!-- 替换联系卡片：将设计好的名片图命名为 contact-card.png，并放入 assets 文件夹 -->
+<div class="contact-card-image image-slot">
+<img alt="韩佳颖联系卡片" data-fallback="" decoding="async" loading="lazy" src="assets/contact-card.png"/>
+<span><strong>联系卡片图片位</strong><small>建议使用真实二维码资源</small></span>
+</div>
+<button aria-label="查看微信二维码并复制微信号" class="contact-hotspot contact-hotspot-wechat" data-contact-open="wechat" type="button"></button>
+<button aria-label="拨打电话或复制手机号" class="contact-hotspot contact-hotspot-phone" data-contact-open="phone" type="button"></button>
+<button aria-label="发送邮件或复制邮箱" class="contact-hotspot contact-hotspot-email" data-contact-open="email" type="button"></button>
+</div>
+</section>
+</main>
+<button aria-label="返回顶部" class="back-to-top" type="button">↑</button>
+<div aria-hidden="true" aria-label="作品大图预览" class="lightbox" role="dialog">
+<button aria-label="关闭预览" class="lightbox-close" type="button">×</button>
+<img alt="作品大图预览" src=""/>
+</div>
+<div aria-hidden="true" aria-label="视频素材预览" class="video-lightbox" role="dialog">
+<button aria-label="关闭视频预览" class="video-lightbox-close" data-video-lightbox-close="" type="button">×</button>
+<video loop="" muted="" playsinline="" preload="metadata"></video>
+</div>
+<div aria-hidden="true" aria-label="浙江省政府奖学金奖状抽屉" aria-modal="true" class="scholarship-drawer" role="dialog">
+<div class="scholarship-drawer-backdrop" data-scholarship-close=""></div>
+<aside class="scholarship-drawer-panel">
+<button aria-label="关闭奖状抽屉" class="scholarship-drawer-close" data-scholarship-close="" type="button">×</button>
+<div class="scholarship-drawer-heading">
+<p class="eyebrow">复合背景</p>
+<h3>教育背景</h3>
+<p>浙江师范大学行知学院｜国际经济与贸易（与英语复合）本科</p>
+<ul class="scholarship-summary">
+<li>连续两年浙江省政府奖学金</li>
+<li>校企合作工作室「励新工坊」成员</li>
+</ul>
+</div>
+<div class="education-proof-media-grid scholarship-viewer" data-education-proof-media=""></div>
+</aside>
+</div>
+<div aria-hidden="true" aria-label="联系方式弹窗" aria-modal="true" class="contact-modal" role="dialog">
+<div class="contact-modal-backdrop" data-contact-close=""></div>
+<div class="contact-modal-panel">
+<button aria-label="关闭联系方式弹窗" class="contact-modal-close" data-contact-close="" type="button">×</button>
+<div class="contact-modal-content" data-contact-panel="wechat">
+<p class="eyebrow">微信联系</p>
+<h3>微信：zz19700958350</h3>
+<div class="wechat-qr image-slot">
+<!-- 替换微信二维码：将二维码命名为 wechat-qr.jpg，并放入 assets 文件夹 -->
+<img alt="微信二维码" data-fallback="" loading="lazy" src="assets/wechat-qr.jpg"/>
+<span><strong>微信二维码</strong><small>请将二维码图片放入 assets/wechat-qr.jpg</small></span>
+</div>
+<button class="btn btn-primary" data-copy="zz19700958350" type="button">复制微信号</button>
+</div>
+<div class="contact-modal-content" data-contact-panel="phone">
+<p class="eyebrow">电话联系</p>
+<h3>手机号：19700958350</h3>
+<div class="modal-actions">
+<a class="btn btn-primary" href="tel:19700958350">直接拨打</a>
+<button class="btn btn-secondary" data-copy="19700958350" type="button">复制号码</button>
+</div>
+</div>
+<div class="contact-modal-content" data-contact-panel="email">
+<p class="eyebrow">邮件联系</p>
+<h3>邮箱：3155294556@qq.com</h3>
+<div class="modal-actions">
+<a class="btn btn-primary" href="mailto:3155294556@qq.com">发送邮件</a>
+<button class="btn btn-secondary" data-copy="3155294556@qq.com" type="button">复制邮箱</button>
+</div>
+</div>
+</div>
+</div>
+<footer class="site-footer">
+<p>© 2026 韩佳颖｜AI产品营销与AIGC内容资产个人网站</p>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="script.js?v=20260620-business-proof-fix-1"></script>
+</body>
+</html>

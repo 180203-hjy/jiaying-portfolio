@@ -1,0 +1,8 @@
+.DS_Store
+._*
+tmp-*.png
+stage-*.md
+node_modules/
+.env
+outputs/
+*.log

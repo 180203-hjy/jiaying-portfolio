@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>中科磁业工业科技方案可视化｜企业路演视觉作品</title>
+  <link rel="stylesheet" href="ppt-viewer.css">
+</head>
+<body>
+  <div class="ppt-page">
+    <header class="ppt-header">
+      <a class="back-link" href="index.html?return=more#more">← 返回作品集</a>
+      <span class="ppt-header-note">部分项目已脱敏，仅展示节选页面</span>
+    </header>
+    <main class="ppt-main ppt-main-compact">
+      <section class="ppt-detail-layout">
+        <aside class="ppt-info-panel">
+          <p class="eyebrow">企业路演视觉作品</p>
+          <h1 data-project-title></h1>
+          <p class="ppt-company" data-project-company></p>
+          <p class="ppt-description" data-project-description></p>
+          <div class="ppt-tags" data-project-tags></div>
+          <div class="ppt-role">
+            <span>我负责</span>
+            <p data-project-role></p>
+          </div>
+          <div class="ppt-actions">
+            <a class="btn btn-secondary" href="index.html?return=more#more">返回作品集</a>
+            <a class="btn btn-primary" href="index.html#contact">联系我查看完整材料</a>
+          </div>
+        </aside>
+        <section class="viewer-shell" aria-label="PPT 节选浏览器">
+          <div class="viewer-stage">
+            <button class="viewer-arrow prev" type="button" data-prev aria-label="上一页">←</button>
+            <div class="slide-frame"></div>
+            <button class="viewer-arrow next" type="button" data-next aria-label="下一页">→</button>
+          </div>
+          <div class="viewer-meta">
+            <strong class="slide-count"></strong>
+            <p class="slide-caption"></p>
+          </div>
+          <div class="thumb-strip" aria-label="缩略图导航"></div>
+        </section>
+      </section>
+    </main>
+    <footer class="ppt-footer">部分企业项目内容已做脱敏处理，仅展示封面与部分视觉页面。</footer>
+  </div>
+  <script>
+    window.pptProject = {
+      title: "中科磁业工业科技方案可视化",
+      company: "浙江中科磁业股份有限公司",
+      description: "借助 AI 在短时间内完成工业科技项目的信息梳理、结构提炼与路演视觉包装，将复杂技术方案转化为更清晰的展示材料。",
+      tags: ["工业科技", "AI辅助梳理", "路演视觉", "方案可视化"],
+      role: "AI辅助信息梳理 / 结构重组 / PPT视觉优化 / 工业科技表达包装",
+      slides: [
+        { type: "image", image: "assets/ppt-zhongke-01.webp", caption: "工业制造语境梳理：将政策背景、市场需求与行业痛点压缩成可展示的项目背景。" },
+        { type: "image", image: "assets/ppt-zhongke-02.webp", caption: "应用场景拆解：把研发、生产、质控三类复杂场景转化为清晰的路演展示模块。" },
+        { type: "image", image: "assets/ppt-zhongke-03.webp", caption: "技术架构可视化：将数据接入、算法核心与应用服务整理为分层架构，降低理解门槛。" }
+      ]
+    };
+  </script>
+  <script src="ppt-viewer.js"></script>
+  <script>
+    (() => {
+      const hideUnavailableBaolinLink = () => {
+        document.querySelectorAll('.ppt-case-nav-link[href="ppt-baolin.html"]').forEach((link) => {
+          link.hidden = true;
+        });
+      };
+      hideUnavailableBaolinLink();
+      window.setTimeout(hideUnavailableBaolinLink, 120);
+    })();
+  </script>
+</body>
+</html>
