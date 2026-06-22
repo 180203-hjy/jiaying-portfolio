@@ -20,6 +20,11 @@ const moreCaseNav = [
   { title: "中科磁业工业科技方案可视化", href: "ppt-zhongke.html" }
 ];
 
+const normalizeCasePath = (value = "") => {
+  const clean = value.split("#")[0].split("?")[0].split("/").filter(Boolean).pop() || "ppt-chaweijianzhi";
+  return clean.replace(/\.html$/i, "");
+};
+
 const isVideoSource = (src = "") => /\.(mp4|webm)$/i.test(src);
 
 const getSlideSource = (slide) => slide?.video || slide?.image || "";
@@ -123,8 +128,8 @@ const initMoreCaseNav = () => {
 
   document.querySelector(".ppt-case-nav")?.remove();
 
-  const currentFile = window.location.pathname.split("/").pop() || "ppt-chaweijianzhi.html";
-  const currentIndex = moreCaseNav.findIndex((item) => item.href === currentFile);
+  const currentSlug = normalizeCasePath(window.location.pathname);
+  const currentIndex = moreCaseNav.findIndex((item) => normalizeCasePath(item.href) === currentSlug);
   if (currentIndex < 0) return;
 
   const previous = moreCaseNav[(currentIndex - 1 + moreCaseNav.length) % moreCaseNav.length];
