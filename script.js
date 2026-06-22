@@ -1714,7 +1714,7 @@ const initWorkflowHeroCarousel = () => {
     panel.dataset.workflowPanel = String(card.id);
     panel.style.setProperty("--workflow-object-position", card.objectPosition || "center center");
     panel.innerHTML = `
-      ${card.video ? `<video muted playsinline loop preload="auto" poster="${card.poster}">
+      ${card.video ? `<video muted playsinline loop preload="none" poster="${card.poster}">
         <source src="${card.video}" type="video/mp4">
       </video>` : ""}
       <img src="${card.poster}" alt="" loading="lazy">
@@ -1811,7 +1811,7 @@ const initWorkflowHeroCarousel = () => {
         button.setAttribute("aria-current", index === activeIndex ? "true" : "false");
         button.dataset.workflowThumb = String(index);
         button.innerHTML = `
-          ${card.video ? `<video muted playsinline loop preload="metadata" poster="${card.poster}" aria-hidden="true">
+          ${card.video ? `<video muted playsinline loop preload="none" poster="${card.poster}" aria-hidden="true">
             <source src="${card.video}" type="video/mp4">
           </video>` : ""}
           <img src="${card.poster}" alt="">
@@ -2760,7 +2760,7 @@ const renderWorkflowPreview = (type) => {
       video.defaultMuted = true;
       video.loop = true;
       video.playsInline = true;
-      video.preload = "metadata";
+      video.preload = "none";
       video.setAttribute("muted", "");
       video.setAttribute("playsinline", "");
       video.setAttribute("aria-label", alt);
@@ -2943,7 +2943,7 @@ const openVideoLightbox = (src) => {
   videoLightboxVideo.muted = true;
   videoLightboxVideo.loop = true;
   videoLightboxVideo.playsInline = true;
-  videoLightboxVideo.preload = "metadata";
+  videoLightboxVideo.preload = "none";
   videoLightboxVideo.autoplay = !prefersReducedMotion;
   videoLightbox.classList.add("is-open");
   videoLightbox.setAttribute("aria-hidden", "false");
