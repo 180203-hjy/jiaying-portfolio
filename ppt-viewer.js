@@ -121,6 +121,8 @@ const initMoreCaseNav = () => {
   const actions = document.querySelector(".ppt-actions");
   if (!infoPanel && !actions) return;
 
+  document.querySelector(".ppt-case-nav")?.remove();
+
   const currentFile = window.location.pathname.split("/").pop() || "ppt-chaweijianzhi.html";
   const currentIndex = moreCaseNav.findIndex((item) => item.href === currentFile);
   if (currentIndex < 0) return;
@@ -173,5 +175,6 @@ frame?.addEventListener("touchend", (event) => {
 if (project?.slides?.length) {
   renderThumbs();
   renderSlide(0);
-  initMoreCaseNav();
 }
+
+initMoreCaseNav();

@@ -398,21 +398,15 @@ button { font: inherit; }
 .ppt-case-nav {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 12px;
-  margin-top: 22px;
-  padding: 14px;
-  border: 1px solid rgba(224, 192, 138, 0.36);
-  border-top: 3px solid rgba(224, 192, 138, 0.78);
-  border-radius: 18px;
-  background:
-    linear-gradient(180deg, rgba(224, 192, 138, 0.12), rgba(255, 255, 255, 0.035)),
-    rgba(0, 0, 0, 0.18);
-  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.26);
+  gap: 9px;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(201, 166, 107, 0.22);
 }
 
 .ppt-case-nav::before {
-  content: "切换企业方案案例";
-  color: var(--gold-light);
+  content: "案例切换";
+  color: rgba(224, 192, 138, 0.72);
   font-size: 12px;
   font-weight: 900;
   letter-spacing: 0.08em;
@@ -423,44 +417,40 @@ button { font: inherit; }
   justify-content: space-between;
   align-items: center;
   gap: 12px;
-  min-height: 58px;
-  padding: 14px 15px;
-  border: 1px solid rgba(224, 192, 138, 0.42);
-  border-radius: 14px;
-  background:
-    linear-gradient(135deg, rgba(224, 192, 138, 0.12), rgba(255, 255, 255, 0.04)),
-    rgba(255, 255, 255, 0.045);
-  color: rgba(246, 241, 232, 0.9);
+  min-height: 48px;
+  padding: 10px 12px;
+  border: 1px solid rgba(201, 166, 107, 0.28);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.028);
+  color: rgba(246, 241, 232, 0.86);
   text-decoration: none;
   transition:
     transform 0.28s ease,
     border-color 0.28s ease,
     background 0.28s ease,
-    box-shadow 0.28s ease;
+    color 0.28s ease;
 }
 
 .ppt-case-nav-link:hover,
 .ppt-case-nav-link:focus-visible {
-  transform: translateY(-2px);
-  border-color: rgba(224, 192, 138, 0.72);
-  background:
-    linear-gradient(135deg, rgba(224, 192, 138, 0.2), rgba(255, 255, 255, 0.06)),
-    rgba(224, 192, 138, 0.08);
-  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.28);
+  transform: translateY(-1px);
+  border-color: rgba(224, 192, 138, 0.54);
+  background: rgba(224, 192, 138, 0.07);
+  color: var(--text);
   outline: none;
 }
 
 .ppt-case-nav-link span {
-  color: var(--gold-light);
+  color: rgba(224, 192, 138, 0.86);
   font-size: 13px;
-  font-weight: 900;
+  font-weight: 800;
   white-space: nowrap;
 }
 
 .ppt-case-nav-link strong {
   color: var(--text);
-  font-size: 15px;
-  font-weight: 900;
+  font-size: 14px;
+  font-weight: 800;
   line-height: 1.35;
   text-align: right;
 }
@@ -534,13 +524,13 @@ button { font: inherit; }
   .viewer-meta { grid-template-columns: 1fr; gap: 6px; }
   .thumb-button { flex-basis: 104px; }
   .ppt-case-nav {
-    margin-top: 20px;
-    padding: 13px;
+    margin-top: 18px;
+    padding-top: 14px;
   }
   .ppt-case-nav-link {
     align-items: flex-start;
     flex-direction: column;
-    min-height: 72px;
+    min-height: 64px;
   }
   .ppt-case-nav-link strong {
     text-align: left;
