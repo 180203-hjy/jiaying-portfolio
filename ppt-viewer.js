@@ -143,11 +143,14 @@ const initMoreCaseNav = () => {
     </a>
   `;
 
+  const roleBlock = infoPanel?.querySelector(".ppt-role");
   const panelActions = infoPanel?.querySelector(".ppt-actions");
-  if (panelActions) {
-    panelActions.insertAdjacentElement("afterend", nav);
+  if (roleBlock) {
+    roleBlock.insertAdjacentElement("beforebegin", nav);
+  } else if (panelActions) {
+    panelActions.insertAdjacentElement("beforebegin", nav);
   } else if (actions) {
-    actions.insertAdjacentElement("afterend", nav);
+    actions.insertAdjacentElement("beforebegin", nav);
   } else {
     infoPanel.appendChild(nav);
   }
