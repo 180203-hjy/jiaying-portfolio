@@ -2676,7 +2676,7 @@ const workflowPreviewData = {
       { type: "image", src: "assets/ppt-1.webp", alt: "产品宣讲 PPT 视觉 01" },
       { type: "image", src: "assets/ppt-2.webp", alt: "产品宣讲 PPT 视觉 02" },
       { type: "image", src: "assets/ppt-3.webp", alt: "产品宣讲 PPT 视觉 03" },
-      { type: "video", src: "assets/workflow-ppt-4.mp4", alt: "产品宣讲 PPT 动态演示 01" },
+      { type: "video", src: "assets/workflow-ppt-4.mp4", poster: "assets/ppt-3.webp", preload: "metadata", alt: "产品宣讲 PPT 动态演示 01" },
       { type: "video", src: "assets/workflow-ppt-5.mp4", alt: "产品宣讲 PPT 动态演示 02" }
     ]
   },
@@ -2691,7 +2691,7 @@ const workflowPreviewData = {
     title: "动态演示",
     desc: "快速输出镜头感与演示氛围画面。",
     items: [
-      { type: "video", src: "assets/motion-1.mp4", alt: "动态演示素材 01" }
+      { type: "video", src: "assets/motion-1.mp4", poster: "assets/workflow-step-04.webp", preload: "metadata", alt: "动态演示素材 01" }
     ]
   },
   material: {
@@ -2765,6 +2765,13 @@ const renderWorkflowPreview = (type) => {
       video.setAttribute("playsinline", "");
       video.setAttribute("aria-label", alt);
       video.src = src;
+      if (entry.poster) {
+        video.poster = entry.poster;
+      }
+      if (entry.preload) {
+        video.preload = entry.preload;
+        video.setAttribute("preload", entry.preload);
+      }
       if (!prefersReducedMotion) {
         video.autoplay = true;
         video.setAttribute("autoplay", "");
