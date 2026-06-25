@@ -13034,3 +13034,277 @@ body.is-entering-portfolio .workflow-preview-panel * {
 .aigc-bridge-sticky:has(#deliverables.is-deliverables-active) #skills .workflow-hero-carousel {
   pointer-events: none;
 }
+
+/* Stage 4H: mobile responsive guardrails. Keep the existing visual language,
+   but prevent narrow screens from inheriting desktop-sized sticky layouts. */
+@media (max-width: 900px) {
+  html,
+  body {
+    max-width: 100%;
+    overflow-x: clip;
+  }
+
+  img,
+  video,
+  canvas {
+    max-width: 100%;
+  }
+
+  .section,
+  .compact-block,
+  .hero,
+  .selected-works-reveal,
+  .more-ppt-section,
+  .contact-section {
+    max-width: 100%;
+    overflow-x: clip;
+  }
+
+  #profile.hero-scroll-scene,
+  .hero-scroll-sticky {
+    min-height: auto;
+  }
+
+  .hero-scroll-sticky {
+    position: relative;
+    top: auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 68px 5vw 52px;
+  }
+
+  .hero-content-stack,
+  .hero-main,
+  .hero-copy,
+  .hero-side {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .hero-side {
+    justify-self: center;
+  }
+
+  .hero-actions,
+  .hero-tags {
+    flex-wrap: wrap;
+  }
+
+  .hero-actions .btn {
+    min-width: 0;
+    white-space: normal;
+  }
+
+  .selected-works-sticky {
+    position: relative;
+    top: auto;
+    min-height: auto;
+  }
+
+  .selected-works-heading,
+  .works-cards,
+  .contact-section,
+  .business-proof-drawer-section {
+    grid-template-columns: 1fr;
+  }
+
+  .work-card,
+  .case-card,
+  .more-ppt-item,
+  .contact-card-wrap,
+  .business-proof-image-only {
+    max-width: 100%;
+  }
+
+  #skills .workflow-hero-carousel {
+    width: 100% !important;
+    max-width: 100% !important;
+    left: auto !important;
+    transform: translate3d(0, var(--workflow-image-y, 0px), 0) !important;
+  }
+
+  #skills .workflow-hero-bg,
+  #skills .workflow-hero-panel {
+    width: 100%;
+  }
+
+  #skills .workflow-hero-panel img,
+  #skills .workflow-hero-panel video,
+  .aigc-bridge-outputs .skills-image-frame img,
+  .workflow-preview-item img,
+  .workflow-preview-item video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  #skills .workflow-hero-copy {
+    width: min(100%, 560px);
+    left: 5vw;
+    right: 5vw;
+    max-width: calc(100vw - 10vw);
+  }
+
+  #skills .workflow-hero-card-track,
+  #skills .workflow-hero-card-track.is-shifting {
+    max-width: 100%;
+    overflow-x: auto;
+  }
+
+  .workflow-preview-panel {
+    width: min(100% - 24px, 720px);
+    max-height: min(86svh, 760px);
+  }
+
+  .more-ppt-track {
+    align-items: stretch;
+  }
+}
+
+@media (max-width: 640px) {
+  .section,
+  .hero {
+    padding-left: 4.5vw;
+    padding-right: 4.5vw;
+  }
+
+  .intro-video-section {
+    min-height: min(620px, calc(100svh - 62px));
+  }
+
+  .hero-scroll-sticky {
+    padding-top: 52px;
+    padding-bottom: 44px;
+  }
+
+  .hero-copy h1,
+  h1 {
+    font-size: clamp(42px, 15vw, 64px);
+    line-height: 0.95;
+  }
+
+  .hero-main .value,
+  .value {
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  .hero-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 100%;
+  }
+
+  .hero-actions .btn,
+  .hero-next-btn {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .hero-lanyard,
+  .lanyard-card-swing {
+    width: min(100%, 320px);
+    max-width: 88vw;
+    margin-inline: auto;
+  }
+
+  .business-proof-image-only,
+  .skills-image-frame,
+  .works-hero-image,
+  .more-ppt-cover,
+  .contact-card-image {
+    aspect-ratio: 16 / 9;
+  }
+
+  .business-proof-image-only img,
+  .skills-image-frame img,
+  .works-hero-image img,
+  .more-ppt-cover img,
+  .contact-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .more-ppt-item {
+    flex: 0 0 min(88vw, 380px);
+    width: min(88vw, 380px);
+    min-width: 0;
+  }
+
+  .more-ppt-content {
+    min-width: 0;
+  }
+
+  .more-ppt-tags {
+    gap: 6px;
+  }
+
+  .contact-modal-panel {
+    width: min(100%, 420px);
+    max-height: 88svh;
+    overflow-y: auto;
+  }
+
+  .wechat-qr {
+    width: min(100%, 260px);
+    margin-inline: auto;
+  }
+
+  .workflow-preview-header,
+  .workflow-preview-tabs {
+    min-width: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .site-header {
+    height: auto;
+    min-height: 62px;
+  }
+
+  .logo {
+    min-width: 0;
+  }
+
+  .section:not(.hero) {
+    padding-top: 44px;
+    padding-bottom: 44px;
+  }
+
+  .hero-copy h1,
+  h1 {
+    font-size: clamp(38px, 14vw, 56px);
+  }
+
+  .hero-tags span,
+  .more-ppt-tags span,
+  .case-meta span {
+    white-space: normal;
+  }
+
+  #skills .workflow-hero-carousel {
+    aspect-ratio: 4 / 5;
+  }
+
+  #skills .workflow-hero-copy {
+    left: 12px;
+    right: 12px;
+    max-width: calc(100vw - 24px);
+    padding: 14px;
+  }
+
+  #skills .workflow-hero-copy h2 {
+    font-size: clamp(24px, 8vw, 32px);
+  }
+
+  #skills .workflow-hero-copy p[data-workflow-hero-desc] {
+    font-size: 13px;
+  }
+
+  #skills .workflow-hero-thumb,
+  #skills .workflow-hero-thumb:hover {
+    min-width: 168px;
+  }
+}

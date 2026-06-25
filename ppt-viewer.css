@@ -570,3 +570,131 @@ button { font: inherit; }
     scroll-behavior: auto !important;
   }
 }
+
+/* Stage 4H: keep the PPT viewer readable and touch-safe on phones/tablets. */
+@media (max-width: 900px) {
+  html,
+  body {
+    max-width: 100%;
+    overflow-x: clip;
+  }
+
+  .ppt-page,
+  .ppt-header,
+  .ppt-main,
+  .ppt-footer,
+  .ppt-detail-layout,
+  .viewer-shell,
+  .ppt-info-panel {
+    width: min(100% - 32px, 760px);
+    max-width: 100%;
+  }
+
+  .ppt-main-compact {
+    padding-top: 22px;
+  }
+
+  .ppt-detail-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .ppt-info-panel {
+    order: 1;
+  }
+
+  .viewer-shell {
+    order: 2;
+  }
+
+  .ppt-case-nav {
+    margin: 16px 0 18px;
+  }
+
+  .ppt-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .slide-frame {
+    width: 100%;
+    max-height: none;
+    aspect-ratio: 16 / 9;
+  }
+
+  .slide-frame img,
+  .slide-frame video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .viewer-arrow {
+    width: 42px;
+    height: 42px;
+    z-index: 5;
+  }
+
+  .thumb-strip,
+  .ppt-main-compact .thumb-strip {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 8px;
+  }
+}
+
+@media (max-width: 640px) {
+  .ppt-page,
+  .ppt-header,
+  .ppt-main,
+  .ppt-footer,
+  .ppt-detail-layout,
+  .viewer-shell,
+  .ppt-info-panel {
+    width: min(100% - 24px, 520px);
+  }
+
+  .ppt-info-panel {
+    padding: 18px;
+    border-radius: 18px;
+  }
+
+  .ppt-info-panel h1 {
+    font-size: clamp(28px, 9vw, 42px);
+    line-height: 1.12;
+  }
+
+  .ppt-case-nav {
+    grid-template-columns: 1fr;
+  }
+
+  .ppt-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .viewer-shell {
+    padding: 12px;
+    border-radius: 16px;
+  }
+
+  .viewer-stage {
+    align-items: center;
+  }
+
+  .viewer-arrow {
+    width: 38px;
+    height: 38px;
+  }
+
+  .thumb-strip,
+  .ppt-main-compact .thumb-strip {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .thumb-button,
+  .ppt-main-compact .thumb-button {
+    min-height: 44px;
+    font-size: 12px;
+  }
+}

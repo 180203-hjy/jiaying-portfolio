@@ -956,3 +956,104 @@ h3 {
     display: none;
   }
 }
+
+/* Stage 4H: narrow-screen layout guardrails. */
+@media (max-width: 900px) {
+  html,
+  body {
+    max-width: 100%;
+    overflow-x: clip;
+  }
+
+  img,
+  video {
+    max-width: 100%;
+  }
+
+  .case-hero,
+  .case-section,
+  .motion-grid,
+  .identity-grid,
+  .scene-layout,
+  .operation-grid,
+  .final-grid,
+  .case-footer-nav {
+    grid-template-columns: 1fr !important;
+    max-width: 100%;
+    overflow-x: clip;
+  }
+
+  .case-copy,
+  .case-hero-visual,
+  .visual-panel,
+  .motion-player,
+  .scene-frame {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .visual-panel,
+  .motion-player,
+  .scene-frame,
+  .case-hero-visual {
+    aspect-ratio: 16 / 9;
+  }
+
+  .visual-panel img,
+  .visual-panel video,
+  .motion-player video,
+  .scene-frame img,
+  .scene-frame video,
+  .case-hero-visual video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .motion-points,
+  .scene-caption {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .case-footer-nav {
+    display: grid;
+    gap: 12px;
+    padding-inline: 5vw;
+  }
+}
+
+@media (max-width: 640px) {
+  .case-shell,
+  .case-section,
+  .case-hero {
+    padding-left: 4.5vw;
+    padding-right: 4.5vw;
+  }
+
+  .case-hero {
+    min-height: auto;
+    padding-top: 84px;
+    padding-bottom: 44px;
+  }
+
+  .case-copy h1,
+  .case-section-heading h2 {
+    font-size: clamp(28px, 9vw, 42px);
+    line-height: 1.12;
+  }
+
+  .case-lead,
+  .case-section-heading p {
+    font-size: 15px;
+  }
+
+  .motion-tags,
+  .case-meta {
+    flex-wrap: wrap;
+  }
+
+  .case-footer-nav .btn {
+    width: 100%;
+  }
+}
