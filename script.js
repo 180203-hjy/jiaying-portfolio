@@ -13,8 +13,16 @@ const contactPanels = document.querySelectorAll("[data-contact-panel]");
 const scholarshipDrawer = document.querySelector(".scholarship-drawer");
 const educationProofMedia = document.querySelector("[data-education-proof-media]");
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-const isWeChatWebView = /MicroMessenger/i.test((window.navigator && window.navigator.userAgent) || "");
-if (isWeChatWebView) {
+const userAgent = (window.navigator && window.navigator.userAgent) || "";
+const isWeChatBrowser = /MicroMessenger/i.test(userAgent);
+const isMobileWeChatUA = /Android|iPhone|iPad|iPod|Mobile/i.test(userAgent);
+const isNarrowWeChatViewport = window.matchMedia("(max-width: 900px)").matches;
+const isCoarseWeChatPointer = window.matchMedia("(pointer: coarse)").matches;
+const shouldUseWeChatFallback = isWeChatBrowser && (isMobileWeChatUA || isNarrowWeChatViewport || isCoarseWeChatPointer);
+if (isWeChatBrowser) {
+  document.documentElement.classList.add("is-wechat-browser");
+}
+if (shouldUseWeChatFallback) {
   document.documentElement.classList.add("is-wechat-webview");
 }
 // Keep heavy decorative effects opt-in. They were legacy visual layers that add
