@@ -13,6 +13,10 @@ const contactPanels = document.querySelectorAll("[data-contact-panel]");
 const scholarshipDrawer = document.querySelector(".scholarship-drawer");
 const educationProofMedia = document.querySelector("[data-education-proof-media]");
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const isWeChatWebView = /MicroMessenger/i.test((window.navigator && window.navigator.userAgent) || "");
+if (isWeChatWebView) {
+  document.documentElement.classList.add("is-wechat-webview");
+}
 // Keep heavy decorative effects opt-in. They were legacy visual layers that add
 // WebGL/canvas/video scrub work on top of the scroll-driven sections.
 const ENABLE_HEAVY_AMBIENT_EFFECTS = false;

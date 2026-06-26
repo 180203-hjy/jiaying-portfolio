@@ -14,6 +14,10 @@
 <script>
   (() => {
     try {
+      if (/MicroMessenger/i.test((window.navigator && window.navigator.userAgent) || "")) {
+        document.documentElement.classList.add("is-wechat-webview");
+      }
+
       const target = new URLSearchParams(window.location.search).get("return");
       if (target === "cases" || target === "more") {
         document.documentElement.classList.add("is-return-navigation");
@@ -24,7 +28,7 @@
     }
   })();
 </script>
-<link href="style.css?v=20260625-mobile-fix-4" rel="stylesheet"/>
+<link href="style.css?v=20260625-wechat-fallback-1" rel="stylesheet"/>
 </head>
 <body>
 <header class="site-header">
@@ -35,7 +39,7 @@
 <main>
 <section aria-label="开场视频" class="intro-video-section" id="intro">
 <div class="intro-video-frame">
-<video autoplay="" class="intro-video" loop="" muted="" playsinline="" preload="auto" poster="assets/hero-transition-bg.webp">
+<video autoplay="" class="intro-video" loop="" muted="" playsinline="" preload="auto">
 <source src="assets/intro-video.mp4" type="video/mp4"/>
 </video>
 </div>
@@ -636,6 +640,6 @@
 <p>© 2026 韩佳颖｜AI产品营销与AIGC内容资产个人网站</p>
 </footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="script.js?v=20260625-mobile-fix-4"></script>
+<script src="script.js?v=20260625-wechat-fallback-1"></script>
 </body>
 </html>
