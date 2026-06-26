@@ -233,7 +233,10 @@ body.is-gate-locked .nav {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background: #050505;
+  background:
+    linear-gradient(180deg, rgba(5, 5, 5, 0.08), rgba(5, 5, 5, 0.22)),
+    url("assets/hero-poster.jpg") center center / cover no-repeat,
+    #050505;
   scroll-margin-top: 62px;
 }
 
@@ -249,7 +252,9 @@ html.is-return-navigation .intro-video-section {
   height: 100%;
   overflow: hidden;
   border-radius: 0;
-  background: #050505;
+  background:
+    url("assets/hero-poster.jpg") center center / cover no-repeat,
+    #050505;
   pointer-events: none;
 }
 
@@ -261,7 +266,15 @@ html.is-return-navigation .intro-video-section {
   object-fit: cover;
   object-position: center center;
   display: block;
-  background: #050505;
+  background:
+    url("assets/hero-poster.jpg") center center / cover no-repeat,
+    #050505;
+  opacity: 0;
+  transition: opacity 420ms ease;
+}
+
+.intro-video-section.is-video-ready .intro-video {
+  opacity: 1;
 }
 
 .intro-video-section.is-video-missing .intro-video,
@@ -12240,6 +12253,10 @@ body.is-gate-locked .intro-enter-btn {
 .intro-video-section::before,
 .intro-video-section::after {
   pointer-events: none;
+}
+
+.intro-video-section.is-video-ready .intro-video {
+  opacity: 1;
 }
 
 body.gate-intro .lightbox,

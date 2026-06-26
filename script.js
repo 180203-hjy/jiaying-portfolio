@@ -2432,7 +2432,13 @@ document.querySelectorAll(".intro-video-section").forEach((section) => {
     return;
   }
 
+  const markIntroVideoReady = () => {
+    section.classList.add("is-video-ready");
+    section.classList.remove("is-video-missing", "is-video-paused");
+  };
+
   const markIntroVideoMissing = () => {
+    section.classList.remove("is-video-ready");
     section.classList.add("is-video-missing");
   };
 
@@ -2442,6 +2448,12 @@ document.querySelectorAll(".intro-video-section").forEach((section) => {
     return;
   }
 
+  if (video.readyState >= 3) {
+    markIntroVideoReady();
+  }
+
+  video.addEventListener("canplay", markIntroVideoReady, { once: true });
+  video.addEventListener("playing", markIntroVideoReady, { once: true });
   video.addEventListener("error", markIntroVideoMissing);
   video.querySelectorAll("source").forEach((source) => {
     source.addEventListener("error", markIntroVideoMissing);
