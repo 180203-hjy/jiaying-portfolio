@@ -14,18 +14,6 @@
 <script>
   (() => {
     try {
-      const ua = (window.navigator && window.navigator.userAgent) || "";
-      const isWeChat = /MicroMessenger/i.test(ua);
-      const isMobileUA = /Android|iPhone|iPad|iPod|Mobile/i.test(ua);
-      const isNarrowViewport = window.matchMedia("(max-width: 900px)").matches;
-      const isCoarsePointer = window.matchMedia("(pointer: coarse)").matches;
-      if (isWeChat) {
-        document.documentElement.classList.add("is-wechat-browser");
-      }
-      if (isWeChat && (isMobileUA || isNarrowViewport || isCoarsePointer)) {
-        document.documentElement.classList.add("is-wechat-webview");
-      }
-
       const target = new URLSearchParams(window.location.search).get("return");
       if (target === "cases" || target === "more") {
         document.documentElement.classList.add("is-return-navigation");
@@ -36,7 +24,7 @@
     }
   })();
 </script>
-<link href="style.css?v=20260625-wechat-fallback-2" rel="stylesheet"/>
+<link href="style.css?v=20260625-remove-wechat-fallback-1" rel="stylesheet"/>
 </head>
 <body>
 <header class="site-header">
@@ -648,6 +636,6 @@
 <p>© 2026 韩佳颖｜AI产品营销与AIGC内容资产个人网站</p>
 </footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="script.js?v=20260625-wechat-fallback-2"></script>
+<script src="script.js?v=20260625-remove-wechat-fallback-1"></script>
 </body>
 </html>
