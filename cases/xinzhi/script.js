@@ -24,7 +24,7 @@ const highlightSlides = [
   },
   {
     title: "项目创新",
-    src: "./assets/highlight-innovation.png",
+    src: "./assets/highlight-innovation.webp",
     desc: "多模型 + 平台 + 智能体协同。把客户识别、趋势预测与销售辅助连接成完整工作流。"
   }
 ];

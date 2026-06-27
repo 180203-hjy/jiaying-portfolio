@@ -237,7 +237,7 @@ const sceneData = {
       },
       {
         type: "image",
-        src: "./assets/yongan-scene-yueman-03.png",
+        src: "./assets/yongan-scene-yueman-03.webp",
         eyebrow: "FULL MOON EXPERIENCE · 03 / 05",
         title: "月满｜玉璧主题农产体验",
         caption: "围绕“太阳与丰收”的意象，将农产品展示、田园趣味与游客消费结合，把乡村农产转化为可体验、可传播的文旅内容。"
@@ -245,6 +245,7 @@ const sceneData = {
       {
         type: "video",
         src: "./assets/yongan-scene-yueman-04.mp4",
+        poster: "./assets/yongan-scene-yueman-04-poster.jpg",
         eyebrow: "FULL MOON EXPERIENCE · 04 / 05",
         title: "月满｜黑陶主题手工体验",
         caption: "以非遗工艺与手作体验为内容切口，让游客从观看转向参与，形成可互动、可带走、可记忆的文化体验。"
@@ -294,7 +295,7 @@ function renderSceneThumbs(area) {
       (slide, index) => `
         <button class="scene-thumb${index === currentSceneIndex ? " is-active" : ""}" type="button" data-scene-index="${index}" aria-label="查看${slide.title}">
           ${slide.type === "video"
-            ? `<video src="${slide.src}" autoplay muted loop preload="metadata" playsinline aria-hidden="true"></video>`
+            ? `<video src="${slide.src}"${slide.poster ? ` poster="${slide.poster}"` : ""} autoplay muted loop preload="metadata" playsinline aria-hidden="true"></video>`
             : `<img src="${slide.src}" alt="" loading="lazy" decoding="async">`}
         </button>
       `
@@ -327,11 +328,15 @@ function updateScene() {
     sceneVideo.hidden = true;
     sceneVideo.pause();
     sceneVideo.removeAttribute("src");
+    sceneVideo.removeAttribute("poster");
     sceneVideo.load();
   }
 
   if (slide.type === "video" && sceneVideo) {
     sceneVideo.hidden = false;
+    if (slide.poster) {
+      sceneVideo.poster = slide.poster;
+    }
     sceneVideo.src = slide.src;
     sceneVideo.load();
     sceneVideo.play().catch(() => {

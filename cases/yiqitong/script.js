@@ -139,6 +139,7 @@ const coreSlides = [
     title: "运",
     subtitle: "LPG智能运输与 AI 路径优化",
     image: "./assets/core-yun.mp4",
+    poster: "./assets/core-yun-poster.jpg",
     caption: "展示运输智能调度、在途状态可视化管控与全时段安全监管。"
   },
   {
@@ -151,6 +152,7 @@ const coreSlides = [
     title: "储",
     subtitle: "多传感融合与储罐监测预警",
     image: "./assets/core-chu.mp4",
+    poster: "./assets/core-chu-poster.jpg",
     caption: "展示储罐状态监测、风险提前预警与全站点一网统管。"
   },
   {
@@ -332,7 +334,7 @@ const setupDeck = (deck) => {
     return `
     <button class="deck-thumb" type="button" aria-label="查看 ${slide.title}">
       ${isVideo
-        ? `<video src="${slide.image}#t=0.12" muted playsinline preload="auto" aria-hidden="true"></video>`
+        ? `<video src="${slide.image}#t=0.12"${slide.poster ? ` poster="${slide.poster}"` : ""} muted playsinline preload="auto" aria-hidden="true"></video>`
         : `<img src="${thumbSrc}" alt="" loading="lazy" decoding="async">`}
     </button>
   `;
