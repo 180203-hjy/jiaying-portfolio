@@ -983,18 +983,34 @@ h3 {
     overflow-x: clip;
   }
 
+  .case-hero {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  .case-hero-copy,
+  .case-title,
+  .eyebrow {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+  }
+
   .case-copy,
   .case-hero-visual,
+  .hero-cover,
   .visual-panel,
   .motion-player,
   .scene-frame {
     width: 100%;
     max-width: 100%;
+    min-width: 0;
   }
 
   .visual-panel,
   .motion-player,
   .scene-frame,
+  .hero-cover,
   .case-hero-visual {
     aspect-ratio: 16 / 9;
   }
@@ -1008,6 +1024,7 @@ h3 {
     width: 100%;
     height: 100%;
     object-fit: contain;
+    display: block;
   }
 
   .motion-points,
