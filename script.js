@@ -13,7 +13,6 @@ const contactPanels = document.querySelectorAll("[data-contact-panel]");
 const scholarshipDrawer = document.querySelector(".scholarship-drawer");
 const educationProofMedia = document.querySelector("[data-education-proof-media]");
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-const detectWeChat = () => /MicroMessenger/i.test(navigator.userAgent || "");
 const detectMobileWeChat = () => {
   const ua = navigator.userAgent || "";
   const isWeChat = /MicroMessenger/i.test(ua);
@@ -22,21 +21,13 @@ const detectMobileWeChat = () => {
   const isCoarsePointer = window.matchMedia("(pointer: coarse)").matches;
   return isWeChat && (isMobileUA || isNarrowViewport || isCoarsePointer);
 };
-const isWeChat = detectWeChat();
 const isMobileWeChat = detectMobileWeChat();
-const isWeChatDebug = new URLSearchParams(window.location.search).get("debugWechat") === "1";
 const setViewportUnit = () => {
   document.documentElement.style.setProperty("--vh", `${window.innerHeight * 0.01}px`);
 };
 setViewportUnit();
-if (isWeChat) {
-  document.documentElement.classList.add("is-wechat");
-}
 if (isMobileWeChat) {
   document.documentElement.classList.add("is-mobile-wechat");
-}
-if (isWeChatDebug) {
-  document.documentElement.classList.add("is-wechat-debug");
 }
 window.addEventListener("resize", setViewportUnit, { passive: true });
 window.addEventListener("orientationchange", () => window.setTimeout(setViewportUnit, 120), { passive: true });
@@ -456,7 +447,7 @@ const initialisePortfolioGate = () => {
   }
 
   const returnHash = initialReturnHash;
-  const browserHash = isWeChat && window.location.hash === "#home" ? "" : window.location.hash;
+  const browserHash = isMobileWeChat && window.location.hash === "#home" ? "" : window.location.hash;
   const hash = returnHash || browserHash;
   const target = hash ? document.querySelector(hash) : introSection;
 
@@ -2470,7 +2461,7 @@ document.querySelectorAll(".intro-video-section").forEach((section) => {
     section.classList.add("is-video-missing");
   };
 
-  if (isWeChat) {
+  if (isMobileWeChat) {
     video.pause();
     video.removeAttribute("autoplay");
     video.preload = "none";
