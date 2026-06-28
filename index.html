@@ -20,6 +20,7 @@
       const isNarrowViewport = window.matchMedia("(max-width: 900px)").matches;
       const isCoarsePointer = window.matchMedia("(pointer: coarse)").matches;
       const isMobileWeChat = isWeChat && (isMobileUA || isNarrowViewport || isCoarsePointer);
+      const params = new URLSearchParams(window.location.search);
       const setViewportUnit = () => {
         document.documentElement.style.setProperty("--vh", `${window.innerHeight * 0.01}px`);
       };
@@ -28,14 +29,22 @@
       window.addEventListener("resize", setViewportUnit, { passive: true });
       window.addEventListener("orientationchange", () => window.setTimeout(setViewportUnit, 120), { passive: true });
 
-      if (isMobileWeChat) {
-        document.documentElement.classList.add("is-mobile-wechat");
+      if (isWeChat) {
+        document.documentElement.classList.add("is-wechat");
         if (window.location.hash === "#home") {
           history.replaceState(null, "", `${window.location.pathname}${window.location.search}`);
         }
       }
 
-      const target = new URLSearchParams(window.location.search).get("return");
+      if (isMobileWeChat) {
+        document.documentElement.classList.add("is-mobile-wechat");
+      }
+
+      if (params.get("debugWechat") === "1") {
+        document.documentElement.classList.add("is-wechat-debug");
+      }
+
+      const target = params.get("return");
       if (target === "cases" || target === "more") {
         document.documentElement.classList.add("is-return-navigation");
         document.documentElement.dataset.returnTarget = target;
@@ -45,7 +54,7 @@
     }
   })();
 </script>
-<link href="style.css?v=20260628-mobile-wechat-fix-1" rel="stylesheet"/>
+<link href="style.css?v=20260628-wechat-audit-fix-1" rel="stylesheet"/>
 </head>
 <body>
 <header class="site-header">
@@ -657,6 +666,6 @@
 <p>© 2026 韩佳颖｜AI产品营销与AIGC内容资产个人网站</p>
 </footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="script.js?v=20260628-mobile-wechat-fix-1"></script>
+<script src="script.js?v=20260628-wechat-audit-fix-1"></script>
 </body>
 </html>
