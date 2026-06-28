@@ -13,6 +13,24 @@ const contactPanels = document.querySelectorAll("[data-contact-panel]");
 const scholarshipDrawer = document.querySelector(".scholarship-drawer");
 const educationProofMedia = document.querySelector("[data-education-proof-media]");
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const detectMobileWeChat = () => {
+  const ua = navigator.userAgent || "";
+  const isWeChat = /MicroMessenger/i.test(ua);
+  const isMobileUA = /Android|iPhone|iPad|iPod/i.test(ua);
+  const isNarrowViewport = window.matchMedia("(max-width: 900px)").matches;
+  const isCoarsePointer = window.matchMedia("(pointer: coarse)").matches;
+  return isWeChat && (isMobileUA || isNarrowViewport || isCoarsePointer);
+};
+const isMobileWeChat = detectMobileWeChat();
+const setViewportUnit = () => {
+  document.documentElement.style.setProperty("--vh", `${window.innerHeight * 0.01}px`);
+};
+setViewportUnit();
+if (isMobileWeChat) {
+  document.documentElement.classList.add("is-mobile-wechat");
+}
+window.addEventListener("resize", setViewportUnit, { passive: true });
+window.addEventListener("orientationchange", () => window.setTimeout(setViewportUnit, 120), { passive: true });
 // Keep heavy decorative effects opt-in. They were legacy visual layers that add
 // WebGL/canvas/video scrub work on top of the scroll-driven sections.
 const ENABLE_HEAVY_AMBIENT_EFFECTS = false;
@@ -429,7 +447,8 @@ const initialisePortfolioGate = () => {
   }
 
   const returnHash = initialReturnHash;
-  const hash = returnHash || window.location.hash;
+  const browserHash = isMobileWeChat && window.location.hash === "#home" ? "" : window.location.hash;
+  const hash = returnHash || browserHash;
   const target = hash ? document.querySelector(hash) : introSection;
 
   if (returnHash && target) {
@@ -2441,6 +2460,15 @@ document.querySelectorAll(".intro-video-section").forEach((section) => {
     section.classList.remove("is-video-ready");
     section.classList.add("is-video-missing");
   };
+
+  if (isMobileWeChat) {
+    video.pause();
+    video.removeAttribute("autoplay");
+    video.preload = "none";
+    video.setAttribute("preload", "none");
+    section.classList.add("is-video-paused");
+    return;
+  }
 
   if (prefersReducedMotion) {
     video.pause();
