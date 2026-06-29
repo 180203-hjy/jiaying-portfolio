@@ -2448,15 +2448,34 @@ document.querySelectorAll(".intro-video-section").forEach((section) => {
     return;
   }
 
-  if (video.readyState >= 3) {
+  const tryPlayIntroVideo = () => {
+    if (prefersReducedMotion || !video.paused) return;
+    const playAttempt = video.play?.();
+    if (playAttempt?.catch) {
+      playAttempt.catch(() => {});
+    }
+  };
+
+  if (video.readyState >= 2) {
     markIntroVideoReady();
   }
 
+  video.addEventListener("loadeddata", markIntroVideoReady, { once: true });
   video.addEventListener("canplay", markIntroVideoReady, { once: true });
   video.addEventListener("playing", markIntroVideoReady, { once: true });
   video.addEventListener("error", markIntroVideoMissing);
   video.querySelectorAll("source").forEach((source) => {
     source.addEventListener("error", markIntroVideoMissing);
+  });
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", tryPlayIntroVideo, { once: true });
+  } else {
+    window.setTimeout(tryPlayIntroVideo, 0);
+  }
+  window.addEventListener("load", tryPlayIntroVideo, { once: true });
+  ["click", "touchstart", "scroll"].forEach((eventName) => {
+    window.addEventListener(eventName, tryPlayIntroVideo, { once: true, passive: true });
   });
 
   setTimeout(() => {
