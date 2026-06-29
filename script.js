@@ -2480,10 +2480,11 @@ document.querySelectorAll(".intro-video-section").forEach((section) => {
     return;
   }
 
-  if (video.readyState >= 3) {
+  if (video.readyState >= 2) {
     markIntroVideoReady();
   }
 
+  video.addEventListener("loadeddata", markIntroVideoReady, { once: true });
   video.addEventListener("canplay", markIntroVideoReady, { once: true });
   video.addEventListener("playing", markIntroVideoReady, { once: true });
   video.addEventListener("error", markIntroVideoMissing);
