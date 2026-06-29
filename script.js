@@ -2448,13 +2448,37 @@ document.querySelectorAll(".intro-video-section").forEach((section) => {
     return;
   }
 
+  const ensureIntroVideoAutoplayAttrs = () => {
+    video.muted = true;
+    video.defaultMuted = true;
+    video.playsInline = true;
+    video.setAttribute("muted", "");
+    video.setAttribute("playsinline", "");
+    video.setAttribute("webkit-playsinline", "");
+  };
+
+  const debugIntroVideo = (eventName, error) => {
+    if (!console?.debug) return;
+    console.debug("[hero-video]", eventName, {
+      readyState: video.readyState,
+      paused: video.paused,
+      currentTime: Number(video.currentTime || 0).toFixed(3),
+      error: error ? (error.name || error.message || String(error)) : null
+    });
+  };
+
   const tryPlayIntroVideo = () => {
-    if (prefersReducedMotion || !video.paused) return;
+    if (prefersReducedMotion || (!video.paused && video.currentTime > 0)) return;
+    ensureIntroVideoAutoplayAttrs();
     const playAttempt = video.play?.();
     if (playAttempt?.catch) {
-      playAttempt.catch(() => {});
+      playAttempt.catch((error) => {
+        debugIntroVideo("play-rejected", error);
+      });
     }
   };
+
+  ensureIntroVideoAutoplayAttrs();
 
   if (video.readyState >= 2) {
     markIntroVideoReady();
@@ -2473,8 +2497,15 @@ document.querySelectorAll(".intro-video-section").forEach((section) => {
   } else {
     window.setTimeout(tryPlayIntroVideo, 0);
   }
+  window.requestAnimationFrame(tryPlayIntroVideo);
+  [300, 800, 1500].forEach((delay) => window.setTimeout(tryPlayIntroVideo, delay));
   window.addEventListener("load", tryPlayIntroVideo, { once: true });
-  ["click", "touchstart", "scroll"].forEach((eventName) => {
+  window.addEventListener("pageshow", tryPlayIntroVideo);
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "visible") tryPlayIntroVideo();
+  });
+  window.addEventListener("focus", tryPlayIntroVideo);
+  ["pointerdown", "touchstart", "click", "scroll"].forEach((eventName) => {
     window.addEventListener(eventName, tryPlayIntroVideo, { once: true, passive: true });
   });
 
