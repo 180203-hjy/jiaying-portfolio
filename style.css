@@ -261,15 +261,17 @@ html.is-return-navigation .intro-video-section {
 .intro-video {
   position: absolute;
   inset: 0;
+  z-index: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center center;
   display: block;
+  visibility: visible;
   background:
     url("assets/hero-poster.jpg") center center / cover no-repeat,
     #050505;
-  opacity: 0;
+  opacity: 1;
   transition: opacity 420ms ease;
 }
 
@@ -279,7 +281,7 @@ html.is-return-navigation .intro-video-section {
 
 .intro-video-section.is-video-missing .intro-video,
 .intro-video-section.is-video-paused .intro-video {
-  opacity: 0;
+  opacity: 1;
 }
 
 .intro-video-section {
