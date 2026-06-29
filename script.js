@@ -13,6 +13,23 @@ const contactPanels = document.querySelectorAll("[data-contact-panel]");
 const scholarshipDrawer = document.querySelector(".scholarship-drawer");
 const educationProofMedia = document.querySelector("[data-education-proof-media]");
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const detectWeChat = () => /MicroMessenger/i.test(navigator.userAgent || "");
+const detectMobileWeChat = () => {
+  const ua = navigator.userAgent || "";
+  const isWeChat = /MicroMessenger/i.test(ua);
+  const isMobileUA = /Android|iPhone|iPad|iPod/i.test(ua);
+  const isNarrowViewport = window.matchMedia("(max-width: 900px)").matches;
+  const isCoarsePointer = window.matchMedia("(pointer: coarse)").matches;
+  return isWeChat && (isMobileUA || isNarrowViewport || isCoarsePointer);
+};
+const isWeChat = detectWeChat();
+const isMobileWeChat = detectMobileWeChat();
+if (isWeChat) {
+  document.documentElement.classList.add("is-wechat");
+}
+if (isMobileWeChat) {
+  document.documentElement.classList.add("is-mobile-wechat");
+}
 // Keep heavy decorative effects opt-in. They were legacy visual layers that add
 // WebGL/canvas/video scrub work on top of the scroll-driven sections.
 const ENABLE_HEAVY_AMBIENT_EFFECTS = false;
@@ -1346,7 +1363,10 @@ const initAigcBridgeReveal = () => {
   };
   const setPx = (name, value) => setVar(name, `${value.toFixed(1)}px`);
   const setNumber = (name, value) => setVar(name, value.toFixed(3));
-  const getProgress = () => clamp((window.scrollY - sectionTop) / scrollable);
+  const getProgress = () => {
+    const progress = (window.scrollY - sectionTop) / scrollable;
+    return Number.isFinite(progress) ? clamp(progress) : bridgePhases[0].progress;
+  };
   const getPhaseTargetY = (progress) => sectionTop + scrollable * progress;
 
   const setStaticState = () => {
@@ -1497,7 +1517,8 @@ const initAigcBridgeReveal = () => {
     }
 
     bridge.classList.remove("is-static");
-    const raw = getProgress();
+    const rawProgress = getProgress();
+    const raw = rawProgress <= 0.001 ? bridgePhases[0].progress : rawProgress;
 
     const intro = smooth(mapRange(raw, 0.00, 0.17));
     const problemCardsIntro = smooth(mapRange(raw, 0.02, 0.19));
@@ -1577,6 +1598,10 @@ const initAigcBridgeReveal = () => {
 
   measure();
   update();
+  window.requestAnimationFrame(() => {
+    measure();
+    update();
+  });
 
   const requestMeasureAndUpdate = () => {
     measure();
@@ -2448,15 +2473,34 @@ document.querySelectorAll(".intro-video-section").forEach((section) => {
     return;
   }
 
-  if (video.readyState >= 3) {
+  const tryPlayIntroVideo = () => {
+    if (prefersReducedMotion || !video.paused) return;
+    const playAttempt = video.play?.();
+    if (playAttempt?.catch) {
+      playAttempt.catch(() => {});
+    }
+  };
+
+  if (video.readyState >= 2) {
     markIntroVideoReady();
   }
 
+  video.addEventListener("loadeddata", markIntroVideoReady, { once: true });
   video.addEventListener("canplay", markIntroVideoReady, { once: true });
   video.addEventListener("playing", markIntroVideoReady, { once: true });
   video.addEventListener("error", markIntroVideoMissing);
   video.querySelectorAll("source").forEach((source) => {
     source.addEventListener("error", markIntroVideoMissing);
+  });
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", tryPlayIntroVideo, { once: true });
+  } else {
+    window.setTimeout(tryPlayIntroVideo, 0);
+  }
+  window.addEventListener("load", tryPlayIntroVideo, { once: true });
+  ["click", "touchstart", "scroll"].forEach((eventName) => {
+    window.addEventListener(eventName, tryPlayIntroVideo, { once: true, passive: true });
   });
 
   setTimeout(() => {
