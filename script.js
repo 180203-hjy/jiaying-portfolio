@@ -13,6 +13,27 @@ const contactPanels = document.querySelectorAll("[data-contact-panel]");
 const scholarshipDrawer = document.querySelector(".scholarship-drawer");
 const educationProofMedia = document.querySelector("[data-education-proof-media]");
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const detectWeChat = () => /MicroMessenger/i.test(navigator.userAgent || "");
+const detectMobileWeChat = () => {
+  const ua = navigator.userAgent || "";
+  const isWeChat = /MicroMessenger/i.test(ua);
+  const isMobileUA = /Android|iPhone|iPad|iPod/i.test(ua);
+  const isNarrowViewport = window.matchMedia("(max-width: 900px)").matches;
+  const isCoarsePointer = window.matchMedia("(pointer: coarse)").matches;
+  return isWeChat && (isMobileUA || isNarrowViewport || isCoarsePointer);
+};
+const isWeChat = detectWeChat();
+const isMobileWeChat = detectMobileWeChat();
+const isWeChatDebug = new URLSearchParams(window.location.search).get("debugWechat") === "1";
+if (isWeChat) {
+  document.documentElement.classList.add("is-wechat");
+}
+if (isMobileWeChat) {
+  document.documentElement.classList.add("is-mobile-wechat");
+}
+if (isWeChatDebug) {
+  document.documentElement.classList.add("is-wechat-debug");
+}
 // Keep heavy decorative effects opt-in. They were legacy visual layers that add
 // WebGL/canvas/video scrub work on top of the scroll-driven sections.
 const ENABLE_HEAVY_AMBIENT_EFFECTS = false;
@@ -429,7 +450,8 @@ const initialisePortfolioGate = () => {
   }
 
   const returnHash = initialReturnHash;
-  const hash = returnHash || window.location.hash;
+  const browserHash = isWeChat && window.location.hash === "#home" ? "" : window.location.hash;
+  const hash = returnHash || browserHash;
   const target = hash ? document.querySelector(hash) : introSection;
 
   if (returnHash && target) {
@@ -2442,6 +2464,16 @@ document.querySelectorAll(".intro-video-section").forEach((section) => {
     section.classList.add("is-video-missing");
   };
 
+  const tryPlayIntroVideo = () => {
+    if (prefersReducedMotion || !video.paused) return;
+    const playAttempt = video.play?.();
+    if (playAttempt?.catch) {
+      playAttempt.catch(() => {
+        section.classList.remove("is-video-ready");
+      });
+    }
+  };
+
   if (prefersReducedMotion) {
     video.pause();
     section.classList.add("is-video-paused");
@@ -2457,6 +2489,16 @@ document.querySelectorAll(".intro-video-section").forEach((section) => {
   video.addEventListener("error", markIntroVideoMissing);
   video.querySelectorAll("source").forEach((source) => {
     source.addEventListener("error", markIntroVideoMissing);
+  });
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", tryPlayIntroVideo, { once: true });
+  } else {
+    window.setTimeout(tryPlayIntroVideo, 0);
+  }
+  window.addEventListener("load", tryPlayIntroVideo, { once: true });
+  ["click", "touchstart", "scroll"].forEach((eventName) => {
+    window.addEventListener(eventName, tryPlayIntroVideo, { once: true, passive: true });
   });
 
   setTimeout(() => {
