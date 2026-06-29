@@ -1368,7 +1368,10 @@ const initAigcBridgeReveal = () => {
   };
   const setPx = (name, value) => setVar(name, `${value.toFixed(1)}px`);
   const setNumber = (name, value) => setVar(name, value.toFixed(3));
-  const getProgress = () => clamp((window.scrollY - sectionTop) / scrollable);
+  const getProgress = () => {
+    const progress = (window.scrollY - sectionTop) / scrollable;
+    return Number.isFinite(progress) ? clamp(progress) : bridgePhases[0].progress;
+  };
   const getPhaseTargetY = (progress) => sectionTop + scrollable * progress;
 
   const setStaticState = () => {
@@ -1519,7 +1522,8 @@ const initAigcBridgeReveal = () => {
     }
 
     bridge.classList.remove("is-static");
-    const raw = getProgress();
+    const rawProgress = getProgress();
+    const raw = rawProgress <= 0.001 ? bridgePhases[0].progress : rawProgress;
 
     const intro = smooth(mapRange(raw, 0.00, 0.17));
     const problemCardsIntro = smooth(mapRange(raw, 0.02, 0.19));
@@ -1599,6 +1603,10 @@ const initAigcBridgeReveal = () => {
 
   measure();
   update();
+  window.requestAnimationFrame(() => {
+    measure();
+    update();
+  });
 
   const requestMeasureAndUpdate = () => {
     measure();
@@ -2468,9 +2476,7 @@ document.querySelectorAll(".intro-video-section").forEach((section) => {
     if (prefersReducedMotion || !video.paused) return;
     const playAttempt = video.play?.();
     if (playAttempt?.catch) {
-      playAttempt.catch(() => {
-        section.classList.remove("is-video-ready");
-      });
+      playAttempt.catch(() => {});
     }
   };
 
